@@ -10,7 +10,8 @@ const io = socketIO(server, {
     }
 });
 io.on("connection", (socket) => {
-    console.log(socket.handshake.query);
-    console.log(socket.handshake.headers['authorization']);
+    socket.on("clientMessage", data => {
+        socket.emit("serverMessage", data)
+    })
 });
 server.listen(8000, () => console.log("run on port 8000"));
