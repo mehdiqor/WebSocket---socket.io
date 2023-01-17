@@ -1,7 +1,16 @@
-const socket = io("http://localhost:8000");
+const socket = io("http://localhost:8000", {
+    query : {
+        field1 : "value1",
+        field2 : "value2"
+    },
+    transportOptions : {
+        polling : {
+            extraHeaders : {
+                Authorization : "Bearer <token>"
+            }
+        }
+    }
+});
 socket.on("connect", data => {
-    socket.emit("welcome-client", "hello server")
-    socket.on("welcome-server", data => {
-        console.log(data);
-    })
+    console.log(data);
 })
